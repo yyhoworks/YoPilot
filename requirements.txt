@@ -1,0 +1,2 @@
+# Only needed by the optional SSH static-file deployment helper.
+paramiko>=3.4,<5

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-skin="claude" data-theme="claude-light" data-brand-ver-mode="version" data-paper-preset="parchment" data-bg-preset="cosmos">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>YoPilot · 运行概览</title>
+  <link id="dynamic-favicon" rel="icon" type="image/png" href="assets/yopilot-brand/yopilot-metal-icon-light.png" />
+<link rel="stylesheet" href="oxidns-localdns.css?v=yopilot1">
+<link rel="stylesheet" href="oxidns-engine.css?v=yopilot2">
+<link rel="stylesheet" href="oxidns-localdns-adapter.css?v=yopilot1">
+<link rel="stylesheet" href="oxidns-observe.css?v=2">
+<link rel="stylesheet" href="oxidns-manage.css?v=3">
+<link rel="stylesheet" href="yopilot-refinements.css?v=20261017-14">
+<link rel="stylesheet" href="yopilot-path-b.css?v=20261017-9">
+<link rel="stylesheet" href="yopilot-overview.css?v=20261017-10">
+<link rel="stylesheet" href="yopilot-rules-cards.css?v=20261017-11">
+<link rel="stylesheet" href="yopilot-completion.css?v=20261017-17">
+<link rel="stylesheet" href="yopilot-workflow.css?v=20261017-17">
+</head>
+<body>
+
+  <div class="wallpaper-layer" id="wallpaper-layer"></div>
+  <div class="wallpaper-dimmer" id="wallpaper-dimmer"></div>
+
+  <div class="master-container">
+    <!-- 顶部栏只保留搜索、连接状态与操作；所有外观设置在统一面板中。 -->
+    <header class="top-header-grid">
+      <div class="navbar-content">
+        <div class="brand-box">
+          <div class="brand-logo" id="brand-logo-slot">
+            <img id="brand-mark" class="brand-lockup" src="assets/yopilot-brand/yopilot-metal-light.png" alt="YoPilot" width="146" height="47" />
+          </div>
+          <span class="brand-ver" id="brand-version-tag" data-backend-version="OxiDNS">OxiDNS</span>
+        </div>
+
+        <div class="top-main-bar">
+          <div class="cmd-search-bar" role="search">
+            <div class="cmd-search-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input type="text" id="global-search-input" aria-label="全局搜索" placeholder="搜索页面、插件或查询记录（/）" />
+            </div>
+            <span class="kbd-tag">Enter</span>
+          </div>
+
+          <div class="top-actions-dock">
+            <div id="connection-status" class="console-status" role="status">
+              <span class="status-dot"></span>
+              <span class="console-status-text">
+                <span class="console-connection-text" id="skin-status-label">已连接 · 人文羊皮纸</span>
+                <small id="status-time-label">更新于 20:35:00</small>
+              </span>
+            </div>
+
+            <div class="glass-action-capsule" role="group" aria-label="控制台工具">
+              <button type="button" class="icon-action-btn" id="btn-open-bg-customizer" aria-label="外观" title="外观与布局" aria-expanded="false" aria-controls="bg-customizer-popover">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                <span>外观</span>
+              </button>
+              <button type="button" class="icon-action-btn" id="refresh-button" aria-label="立即刷新" title="立即刷新"></button>
+            </div>
+
+            <!-- 外观与双皮肤自定义面板（完整支持两套皮肤独立预设与记忆） -->
+            <div class="bg-customizer-popover" id="bg-customizer-popover" role="dialog" aria-label="外观与双皮肤切换">
+              <div class="bcp-title">
+                <span>界面皮肤与外观定制</span>
+                <button type="button" class="glass-btn button small" id="btn-close-bg-popover">关闭</button>
+              </div>
+
+              <!-- 新增：双皮肤卡片选择器 -->
+              <div class="bcp-group">
+                <div class="bcp-group-title">界面皮肤 (独立保存各自配置)</div>
+                <div class="skin-cards-grid">
+                  <button type="button" class="skin-select-card active" data-skin-switch="claude">
+                    <strong>
+                      <span>人文羊皮纸</span>
+                      <span class="badge cyan" style="font-size:10px;padding:1px 5px">Claude</span>
+                    </strong>
+                    <small>温暖羊皮纸、赤陶强调色与智库衬线排版</small>
+                  </button>
+                  <button type="button" class="skin-select-card" data-skin-switch="glass">
+                    <strong>
+                      <span>流光毛玻璃</span>
+                      <span class="badge primary" style="font-size:10px;padding:1px 5px">原版</span>
+                    </strong>
+                    <small>深空光影、半透明磨砂层与霓虹流光</small>
+                  </button>
+                </div>
+              </div>
+
+              <div class="bcp-group yp-appearance-controls">
+                <div class="bcp-group-title">明暗与动效</div>
+                <div class="bcp-row yp-appearance-control">
+                  <span>当前皮肤明暗模式</span>
+                  <button type="button" class="icon-action-btn" id="theme-toggle" aria-label="切换当前皮肤的明暗模式" title="切换当前皮肤的浅色 / 深色模式"></button>
+                </div>
+                <div class="bcp-row yp-appearance-control">
+                  <span>DNS 解析路径流光</span>
+                  <button type="button" class="icon-action-btn active" id="btn-toggle-particles" aria-label="解析路径流光" aria-pressed="true" title="拓扑流光动画开关">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h5l3 5-3 5H3M14 7h7M14 17h7"/></svg>
+                    <span>流光</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="bcp-group">
+                <div class="bcp-group-title" id="bcp-palette-group-title">纸张与暗夜色彩基调</div>
+                <div class="bcp-row">
+                  <div class="bcp-row-head"><span id="bcp-preset-label">预设主题色</span><strong class="mono" id="val-preset">经典羊皮纸</strong></div>
+                  <!-- 皮肤 1：人文羊皮纸 (Claude) 5 套色球 -->
+                  <div class="preset-swatches" id="swatches-claude">
+                    <button type="button" class="preset-btn active" data-claude-preset="parchment" data-mode="claude-light" title="经典羊皮纸 (Claude Default)" style="background:linear-gradient(135deg, #F4F3EE 55%, #C96442 100%)"></button>
+                    <button type="button" class="preset-btn" data-claude-preset="ivory" data-mode="claude-light" title="温暖象牙白 (Warm Ivory)" style="background:linear-gradient(135deg, #FAF8F5 55%, #2D6A4F 100%)"></button>
+                    <button type="button" class="preset-btn" data-claude-preset="oatmeal" data-mode="claude-light" title="燕麦工作室 (Oatmeal Studio)" style="background:linear-gradient(135deg, #ECE9E0 55%, #B06A1E 100%)"></button>
+                    <button type="button" class="preset-btn" data-claude-preset="obsidian" data-mode="claude-dark" title="温暖黑曜石 (Claude Dark)" style="background:linear-gradient(135deg, #222220 55%, #D97757 100%)"></button>
+                    <button type="button" class="preset-btn" data-claude-preset="midnight" data-mode="claude-dark" title="静谧深炭黑 (Midnight Ink)" style="background:linear-gradient(135deg, #121211 55%, #74A9CE 100%)"></button>
+                  </div>
+                  <!-- 皮肤 2：流光毛玻璃 (原版) 5 套色球 -->
+                  <div class="preset-swatches" id="swatches-glass" hidden>
+                    <button type="button" class="preset-btn active" data-glass-preset="cosmos" title="深空暖金 (原版默认)" style="background:radial-gradient(circle at 30% 35%, #c48a45, #090a0f 75%)"></button>
+                    <button type="button" class="preset-btn" data-glass-preset="aurora" title="极光深海" style="background:radial-gradient(circle at 30% 35%, #2563eb, #090a0f 75%)"></button>
+                    <button type="button" class="preset-btn" data-glass-preset="emerald" title="暗夜翡翠" style="background:radial-gradient(circle at 30% 35%, #10b981, #090a0f 75%)"></button>
+                    <button type="button" class="preset-btn" data-glass-preset="sunset" title="日落琥珀" style="background:radial-gradient(circle at 30% 35%, #ea580c, #090a0f 75%)"></button>
+                    <button type="button" class="preset-btn" data-glass-preset="minimal" title="纯净暗黑" style="background:#08090c"></button>
+                  </div>
+                </div>
+
+                <div class="bcp-row">
+                  <div class="bcp-row-head"><span>本地壁纸</span><strong class="mono">本次预览</strong></div>
+                  <div class="bcp-inline">
+                    <label class="glass-btn primary" style="flex:1;cursor:pointer">
+                      选择本地图片...
+                      <input type="file" id="bg-file-input" accept="image/*" style="display:none" />
+                    </label>
+                    <button type="button" class="glass-btn" id="btn-clear-custom-bg">恢复默认</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bcp-group">
+                <div class="bcp-group-title">面板质感与界面几何</div>
+                <div class="bcp-row" id="row-slider-blur" hidden>
+                  <div class="bcp-row-head"><label for="slider-blur">毛玻璃模糊度</label><strong class="mono" id="val-blur">14px</strong></div>
+                  <input type="range" class="bcp-slider" id="slider-blur" min="4" max="48" value="14" />
+                </div>
+                <div class="bcp-row">
+                  <div class="bcp-row-head"><label for="slider-alpha" id="label-slider-alpha">卡片遮盖度（纸张不透明度）</label><strong class="mono" id="val-alpha">94%</strong></div>
+                  <input type="range" class="bcp-slider" id="slider-alpha" min="25" max="100" value="94" />
+                </div>
+                <div class="bcp-row">
+                  <div class="bcp-row-head"><label for="slider-radius">界面圆角比例</label><strong class="mono" id="val-radius">100%</strong></div>
+                  <input type="range" class="bcp-slider" id="slider-radius" min="40" max="200" step="10" value="100" aria-describedby="radius-scope-note" />
+                  <p class="bcp-radius-note" id="radius-scope-note">40%–200% · 同步调整面板、解析路径节点与缓存卡片；圆形图标保持不变。</p>
+                </div>
+                <div class="bcp-row">
+                  <div class="bcp-row-head"><label for="select-brand-ver">后端标识</label><strong class="mono" id="val-brand-ver">显示 OxiDNS</strong></div>
+                  <select class="bcp-input" id="select-brand-ver">
+                    <option value="hidden">隐藏</option>
+                    <option value="version" selected>显示 OxiDNS</option>
+                    <option value="custom">自定义文字</option>
+                  </select>
+                  <input class="bcp-input" id="input-brand-ver" type="text" maxlength="14" placeholder="例如 Claude-v1" style="margin-top:6px" hidden />
+                </div>
+              </div>
+
+              <section class="bcp-fonts" aria-labelledby="typography-title">
+                <h3 id="typography-title">字体与阅读（支持本地字体上传）</h3>
+                <div class="font-presets" role="group" aria-label="字体组合">
+                  <button type="button" data-font-preset="editorial" aria-pressed="true">经典宋体</button>
+                  <button type="button" data-font-preset="clear" aria-pressed="false">清晰黑体</button>
+                  <button type="button" data-font-preset="technical" aria-pressed="false">等宽数字</button>
+                </div>
+                <div class="font-setting"><label for="font-heading">标题字体</label><select id="font-heading"><option value="serif" selected>Noto Serif SC · 宋体</option><option value="sans">Noto Sans SC · 黑体</option></select></div>
+                <div class="font-setting"><label for="font-numeral">指标数字</label><select id="font-numeral"><option value="serif" selected>Instrument Serif · 衬线</option><option value="sans">IBM Plex Sans · 无衬线</option><option value="mono">IBM Plex Mono · 等宽</option></select></div>
+                <div class="font-setting"><label for="font-body">界面文字</label><select id="font-body"><option value="plex" selected>IBM Plex Sans + Noto Sans</option><option value="serif">人文衬线阅读</option></select></div>
+                <div class="bcp-row" style="margin-top:10px">
+                  <div class="bcp-row-head"><span>自定义字体文件</span><strong class="mono" id="val-font-upload">未上传</strong></div>
+                  <label class="glass-btn" style="width:100%;cursor:pointer">
+                    上传 .ttf / .otf / .woff2 字体…
+                    <input type="file" id="input-font-upload" accept=".ttf,.otf,.woff,.woff2" hidden />
+                  </label>
+                </div>
+                <p class="font-note">域名、IP、日志和规则编辑器始终保持 IBM Plex Mono 等宽排版。</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主导航与内容区 -->
+    <div class="shell-grid">
+      <aside class="glass-sidebar" id="sidebar" aria-label="主导航侧边栏">
+        <nav id="side-nav" aria-label="控制台导航"></nav>
+
+        <div class="sidebar-foot" id="sidebar-status">
+          <span class="dot-online" aria-hidden="true"></span>
+          <div class="sidebar-status-copy">
+            <strong style="font-weight:600;color:var(--text-1)">示例 · 未连接服务</strong>
+            <small id="api-endpoint-label">配置仅保存本地</small>
+          </div>
+        </div>
+      </aside>
+
+      <main class="dashboard-12grid" id="page-content" tabindex="-1"></main>
+    </div>
+
+    <nav id="mobile-nav" class="mobile-nav" aria-label="手机导航" style="display:none"></nav>
+  </div>
+
+  <!-- 侧滑详情抽屉 -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-labelledby="drawer-title">
+    <div class="drawer-header">
+      <div><h2 id="drawer-title">详情</h2><p id="drawer-subtitle"></p></div>
+      <button class="glass-btn button small" id="drawer-close" aria-label="关闭">关闭</button>
+    </div>
+    <div id="drawer-content" class="drawer-content"></div>
+  </aside>
+
+  <!-- 通用模态框 -->
+  <dialog id="modal" class="modal">
+    <form method="dialog" class="modal-panel" id="modal-form">
+      <div class="modal-header">
+        <div><h2 id="modal-title">操作</h2><p id="modal-subtitle"></p></div>
+        <button class="glass-btn button small" id="modal-close" type="button">关闭</button>
+      </div>
+      <div id="modal-content" class="modal-content"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </form>
+  </dialog>
+
+  <div id="toast-stack" class="toast-stack" aria-live="polite"></div>
+
+<script src="vendor/js-yaml.min.js"></script>
+<script src="oxidns-plugin-catalog.js"></script>
+<script src="oxidns-rule-tools.js?v=yopilot1"></script>
+<script src="oxidns-engine.js?version=20261017-17"></script>
+<script src="oxidns-observe-model.js?version=20261017-8"></script>
+<script src="yopilot-overview-model.js?v=20261017-10"></script>
+<script src="yopilot-overview.js?v=20261017-10"></script>
+<script src="oxidns-advanced-model.js?v=20261017-8"></script>
+<script src="oxidns-dynamic-model.js?v=20261017-7"></script>
+<script src="oxidns-observe.js?version=20261017-17"></script>
+<script src="oxidns-advanced.js?v=20261017-17"></script>
+<script src="oxidns-dynamic.js?v=20261017-7"></script>
+<script src="oxidns-manage-model.js?v=3"></script>
+<script src="yopilot-presentation.js?v=20261017-1"></script>
+<script src="yopilot-rules-cards.js?v=20261017-11"></script>
+<script src="oxidns-manage.js?v=20261017-17"></script>
+<script src="yopilot-path-model.js?v=20261017-9"></script>
+<script src="yopilot-workflow-model.js?v=20261017-17"></script>
+<script src="yopilot-path.js?v=20261017-9"></script>
+<script src="yopilot-causal.js?v=20261017-17"></script>
+<script src="yopilot-quality.js?v=20261017-13"></script>
+<script src="yopilot-sequence.js?v=20261017-17"></script>
+<script src="yopilot-native-pages.js?v=20261017-17"></script>
+<script src="yopilot-query-tools.js?v=20261017-17"></script>
+<script src="yopilot-workflow.js?v=20261017-17"></script>
+<script src="oxidns-localdns.js?v=20261017-13"></script>
+<script src="yopilot-navigation.js?v=20261017-14"></script>
+</body>
+</html>

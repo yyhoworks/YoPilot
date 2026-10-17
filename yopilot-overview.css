@@ -1,0 +1,45 @@
+/* Compact service summary and scoped statistics, inheriting all four console themes. */
+.ypo-service{padding:22px 24px;min-width:0}
+.ypo-service-top{display:grid;grid-template-columns:minmax(240px,.9fr) minmax(0,2.2fr);gap:24px;align-items:center}
+.ypo-identity h1{font:600 26px/1.3 var(--font-heading-active);margin:0 0 8px}
+.ypo-identity p{font-size:12px;line-height:1.7;color:var(--text-2);margin:9px 0 0;overflow-wrap:anywhere}
+.ypo-inline-divider{display:none}
+.ypo-process-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:0}
+.ypo-process-facts>div{min-width:0;padding:0 0 0 14px;border-left:1px solid var(--border-glass)}
+.ypo-process-facts dt{font-size:12px;color:var(--text-2);margin:0 0 9px}
+.ypo-process-facts dd{font:500 21px/1.45 var(--font-numeral-active);font-variant-numeric:tabular-nums;margin:0;color:var(--text-1);overflow-wrap:anywhere}
+.ypo-process-facts>div:first-child dd{font:500 14px/1.65 var(--font-body-active)}
+.ypo-process-facts>div:nth-child(2) dd{font-size:18px}
+.ypo-process-facts small{display:block;font-size:12px;color:var(--text-2);line-height:1.6;margin-top:5px}
+.ypo-service-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;margin-top:18px;border-top:1px solid var(--border-glass);padding-top:14px}
+.ypo-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ypo-controls .oxi-actions{gap:8px}
+.ypo-config-status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--text-2)}
+.ypo-statistics{min-width:0}
+.ypo-scope-note{display:flex;align-items:baseline;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;font-size:12px;line-height:1.7;color:var(--text-2);margin:0 2px 12px}
+.ypo-kpis{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.ypo-kpis .ypo-kpi{min-width:0;min-height:156px;padding:18px 20px;gap:5px;text-align:left;color:var(--text-1);font-family:var(--font-body-active);box-shadow:none}
+.ypo-kpi .ypo-kpi-label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px;line-height:1.6;color:var(--text-2)}
+.ypo-kpi .ypo-detail-label{font-size:11px;color:var(--text-2);white-space:nowrap}
+.ypo-kpis .ypo-kpi>strong{font:500 32px/1.3 var(--font-numeral-active);font-variant-numeric:tabular-nums;margin:3px 0 5px;overflow-wrap:anywhere}
+.ypo-kpi>strong>span{font:400 12px var(--font-body-active);color:var(--text-2);margin-left:6px;letter-spacing:normal}
+.ypo-kpis .ypo-kpi>small{font:400 12px/1.6 var(--font-body-active);color:var(--text-2);overflow-wrap:anywhere}
+.ypo-kpi>small:last-child{margin-top:auto}
+button.ypo-kpi{cursor:pointer;transition:background .16s ease-out,border-color .16s ease-out}
+button.ypo-kpi:hover{background:var(--bg-elevated);border-color:var(--accent)}
+button.ypo-kpi:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+button.ypo-kpi:active{transform:translateY(1px)}
+.ypo-quality .card-header p{font-size:12px;color:var(--text-2)}
+.ypo-quality table{font-variant-numeric:tabular-nums}
+.ypo-target-summary{display:block;font-size:12px;line-height:1.65;color:var(--text-2);margin-top:5px;overflow-wrap:anywhere;max-width:48ch}
+.ypo-quality-note{padding:14px 18px;font-size:12px;line-height:1.7;color:var(--text-2);margin:0}
+.ypo-explanation{font-size:13px;line-height:1.8;color:var(--text-2);margin:0 0 18px;max-width:70ch;overflow-wrap:anywhere}
+.ypo-list-label{display:flex;flex-direction:column;gap:8px;font-size:13px;margin:0 0 16px}
+.ypo-list-label input{min-height:44px;border:1px solid var(--border-strong);border-radius:calc(8px * var(--radius-scale,1));background:var(--bg-elevated);color:var(--text-1);font:14px var(--font-body-active);padding:10px 12px;caret-color:var(--accent)}
+.ypo-list-pagination{display:flex;gap:12px;justify-content:flex-end;margin-top:16px}
+.ypo-list-pagination button,.ypo-list-item{min-height:44px}
+.ypo-list-item{overflow-wrap:anywhere;max-width:100%;text-align:left}
+@media(max-width:1400px){.ypo-service-top{grid-template-columns:1fr}.ypo-process-facts>div:first-child{padding-left:0;border:0}.ypo-identity p br{display:none}.ypo-inline-divider{display:inline}}
+@media(max-width:1050px){.ypo-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ypo-process-facts{gap:14px}.ypo-kpi .ypo-detail-label{font-size:11px}}
+@media(max-width:600px){.ypo-service{padding:18px}.ypo-process-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px}.ypo-process-facts>div:nth-child(3){padding:0;border:0}.ypo-service-top{gap:18px}.ypo-controls{gap:10px}.ypo-controls .ob-updated{width:100%}.ypo-kpis{gap:12px}.ypo-kpis .ypo-kpi{min-height:158px;padding:14px}.ypo-kpi .ypo-detail-label{display:none}.ypo-scope-note{font-size:12px}.ypo-kpis .ypo-kpi>strong{font-size:28px}.ypo-list-label input{font-size:16px}}
+@media(prefers-reduced-motion:reduce){button.ypo-kpi{transition:none}button.ypo-kpi:active{transform:none}}

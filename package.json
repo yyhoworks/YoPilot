@@ -1,0 +1,14 @@
+{
+  "name": "yopilot",
+  "version": "0.1.0",
+  "description": "基于 OxiDNS 原生 API 的 DNS 管理前端",
+  "license": "GPL-3.0-or-later",
+  "private": true,
+  "repository": "github:yyhoworks/YoPilot",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node scripts/test.cjs",
+    "check": "node scripts/check-assets.cjs",
+    "package": "python scripts/package-ui.py"
+  }
+}
